@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "866849119509",
+    "project_id": "soulmatch-9ea82",
+    "storage_bucket": "soulmatch-9ea82.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866849119509:android:2e2c01bf517c8846b85d1c",
+        "android_client_info": {
+          "package_name": "com.example.soulmatch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM6Vvri8BM5dQ2q6ik_3I5VgVDUlp3Gag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866849119509:android:52ca6e15c1073452b85d1c",
+        "android_client_info": {
+          "package_name": "com.example.soulmatchapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM6Vvri8BM5dQ2q6ik_3I5VgVDUlp3Gag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
