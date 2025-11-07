@@ -4,14 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.soulmatchapp.databinding.ActivityLoginBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,60 +28,81 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        // Login button click
+        // Configure Google Sign-In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id)) // from google-services.json
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        // Email/Password login
         binding.loginButton.setOnClickListener {
             val email = binding.loginEmail.text.toString().trim()
             val password = binding.loginPassword.text.toString().trim()
 
-            // Validate email
-            if (email.isEmpty()) {
-                binding.loginEmail.error = "Email required"
-                binding.loginEmail.requestFocus()
-                return@setOnClickListener
-            }
-
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 binding.loginEmail.error = "Invalid email"
-                binding.loginEmail.requestFocus()
                 return@setOnClickListener
             }
 
-            // Validate password
-            if (password.isEmpty() || password.length < 6) {
+            if (password.length < 6) {
                 binding.loginPassword.error = "Password must be at least 6 characters"
-                binding.loginPassword.requestFocus()
                 return@setOnClickListener
             }
 
-            // Login user
             loginUser(email, password)
         }
 
-        // Sign up TextView click
+        // Sign Up link
         binding.tvSignup.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
         }
 
-        // Optional: Sign Up button click (if you want both ways)
-        binding.signButton.setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
+        // Google Sign-In button
+        binding.googleSignInButton.setOnClickListener {
+            signInWithGoogle()
         }
     }
 
-    private fun loginUser(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
+    private val googleSignInLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+        try {
+            val account: GoogleSignInAccount = task.getResult(ApiException::class.java)
+            firebaseAuthWithGoogle(account.idToken!!)
+        } catch (e: ApiException) {
+            Toast.makeText(this, "Google Sign-In failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun signInWithGoogle() {
+        val signInIntent = googleSignInClient.signInIntent
+        googleSignInLauncher.launch(signInIntent)
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, DashboardActivity::class.java))
                     finish()
                 } else {
-                    Toast.makeText(
-                        this,
-                        "Login failed: ${task.exception?.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
                 }
             }
+    }
+
+    private fun loginUser(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+            if (it.isSuccessful) {
+                startActivity(Intent(this, DashboardActivity::class.java))
+                finish()
+            } else {
+                Toast.makeText(this, "Login failed", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }

@@ -1,7 +1,11 @@
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.services)
+
+    id("kotlin-kapt")
 
 }
 
@@ -63,6 +67,34 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+// Retrofit (for API calls)
+    implementation(libs.retrofit)
+
+// Gson converter for JSON parsing
+    implementation(libs.retrofit.gson)
+
+// OkHttp (for HTTP client)
+    implementation(libs.okhttp)
+
+// OkHttp logging interceptor (for debugging network calls)
+    implementation(libs.okhttp.logging)
+
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
+    implementation(libs.androidx.preference)
+    implementation(libs.firebase.messaging)
+
+    implementation(platform(libs.firebase.bom))
+
+    implementation(libs.google.play.services.auth)
+
+
+
+
+
+
 
 
 
