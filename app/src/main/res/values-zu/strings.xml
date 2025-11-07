@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SoulMatch</string>
+
+    <string-array name="languages">
+        <item>IsiNgesi</item>
+        <item>isiXhosa</item>
+        <item>isiZulu</item>
+    </string-array>
+
+    <string name="welcome">Siyakwamukela</string>
+    <string name="logout">Phuma</string>
+    <string name="settings">Izilungiselelo</string>
+    <string name="find_soulmate">Thola Umphefumulo Ohlangene</string>
+    <string name="saved_profiles">Amaphrofayela Agciniwe</string>
+    <string name="notifications">Izaziso</string>
+    <string name="love_quote">Isisho Sothando</string>
+    <string name="dark_mode">Imodi Emnyama</string>
+    <string name="app_language">Ulimi Lohlelo</string>
+    <string name="enable_dark_theme">Vula noma uvale imodi emnyama</string>
+    <string name="choose_language">Khetha ulimi</string>
+    <string name="dashboard_title">I-Dashboard yeSoulMatch</string>
+    <string name="loading_quote">Ilayisha isisho sothando</string>
+    <string name="quote_error">Ayikwazanga ukulayisha isisho sothando</string>
+    <string name="network_error">Iphutha lenethiwekhi</string>
+    <string name="unknown_author">Umbhali ongaziwa</string>
+    <string name="refresh_quote">Hlaziya isisho</string>
+    <string name="app_settings">Izilungiselelo Zohlelo</string>
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SoulMatch</string>
+    <string-array name="languages">
+        <item>IsiNgesi</item>
+        <item>isiXhosa</item>
+        <item>isiZulu</item>
+    </string-array>
+
+
+    <string name="welcome">Wamkelekile</string>
+    <string name="logout">Phuma</string>
+    <string name="settings">Useto</string>
+    <string name="find_soulmate">Fumana Umtshato Womphefumlo</string>
+    <string name="saved_profiles">Iiprofayile Ezigciniweyo</string>
+    <string name="notifications">Izaziso</string>
+    <string name="love_quote">Ibinzana Lothando</string>
+    <string name="dark_mode">Imo Emnyama</string>
+    <string name="app_language">Ulwimi Lwesicelo</string>
+    <string name="enable_dark_theme">Yenza okanye ucime imo emnyama</string>
+    <string name="choose_language">Khetha ulwimi olusetyenzisiweyo</string>
+    <string name="dashboard_title">Ibhodi yeSoulMatch</string>
+    <string name="loading_quote">Ilayisha ibinzana lothando</string>
+    <string name="quote_error">Ayikwazanga ukulayisha ibinzana lothando</string>
+    <string name="network_error">Impazamo yenethiwekhi</string>
+    <string name="unknown_author">Umntu ongaziwayo</string>
+    <string name="refresh_quote">Qalela amaquotes</string>
+    <string name="app_settings">Iisetingi zesicelo</string>
+
+
+</resources>
