@@ -5,6 +5,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface QuoteApi {
-    @GET("random?tags=love")
-    fun getRandomLoveQuote(): Call<Quote>
+    // ZenQuotes returns a JSON array of quotes
+    @GET("random")
+    fun getRandomLoveQuote(): Call<List<Quote>>
 }

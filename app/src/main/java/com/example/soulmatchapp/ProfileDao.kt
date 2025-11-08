@@ -1,4 +1,5 @@
-package com.example.yourapp.model
+package com.example.soulmatchapp.model
+
 
 import androidx.room.Dao
 import androidx.room.Insert

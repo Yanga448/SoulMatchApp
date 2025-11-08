@@ -1,4 +1,4 @@
-package com.example.yourapp.model
+package com.example.soulmatchapp.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

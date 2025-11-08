@@ -32,8 +32,8 @@ class UserAdapter(
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = users[position]
-        holder.name.text = user.name
-        holder.details.text = "${user.gender} • ${user.interests.joinToString(", ")}"
+        holder.name.text = user.name ?: "Unknown"
+        holder.details.text = "${user.gender ?: "N/A"} • ${user.interests?.joinToString(", ") ?: ""}"
 
         user.profileImage?.let {
             try {

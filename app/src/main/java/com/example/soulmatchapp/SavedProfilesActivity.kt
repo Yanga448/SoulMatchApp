@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.yourapp.model.AppDatabase
-import com.example.yourapp.model.Profile
+import com.example.soulmatchapp.model.AppDatabase
+import com.example.soulmatchapp.model.Profile
 import kotlinx.coroutines.launch
 
 class SavedProfilesActivity : AppCompatActivity() {

@@ -18,14 +18,20 @@
             app:layout_constraintTop_toBottomOf="@id/tvSignup"
             tools:ignore="HardcodedText,TextContrastCheck,VisualLintButtonSize" />
 
-        <com.google.android.gms.common.SignInButton
+        <Button
             android:id="@+id/googleSignInButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="#FFFFFF"
+            android:text="Sign in with Google"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@id/signButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signButton" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="HardcodedText,VisualLintButtonSize" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

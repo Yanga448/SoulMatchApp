@@ -90,7 +90,7 @@ dependencies {
 
     implementation(libs.google.play.services.auth)
 
-
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
 
 
 

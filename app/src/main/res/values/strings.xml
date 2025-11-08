@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SoulMatch</string>
-    <string name="default_web_client_id">866849119509-5dqk687ddecnk9iqakilsrdb8em3roas.apps.googleusercontent.com</string>
+    <string name="default_web_client_id">
+    866849119509-5dqk687ddecnk9iqakilsrdb8em3roas.apps.googleusercontent.com
+</string>
+
 
     <string-array name="languages">
         <item>English</item>

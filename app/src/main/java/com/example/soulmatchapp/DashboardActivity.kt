@@ -20,7 +20,6 @@ class DashboardActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDashboardBinding
     private lateinit var auth: FirebaseAuth
-
     private val NOTIFICATION_PERMISSION_REQUEST = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +29,13 @@ class DashboardActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        // ✅ Ask user for notification permission (Android 13+)
+        // ✅ Ask for notification permission (Android 13+)
         requestNotificationPermission()
 
-        // 🔁 Load quote
+        // 💬 Load first love quote
         loadLoveQuote()
 
+        // 🧭 Button listeners
         binding.btnFindSoulmate.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
@@ -67,7 +67,7 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    // ✅ Ask for notification permission only when needed
+    // 🪄 Ask for notification permission
     private fun requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
@@ -84,7 +84,7 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    // 🧠 Fetch love quote from API
+    // 💖 Load love quote from ZenQuotes API
     private fun loadLoveQuote() {
         binding.quoteText.animate().alpha(0f).setDuration(300).start()
         binding.quoteAuthor.animate().alpha(0f).setDuration(300).start()
@@ -92,12 +92,12 @@ class DashboardActivity : AppCompatActivity() {
         binding.quoteText.text = "Loading love quote..."
         binding.quoteAuthor.text = ""
 
-        RetrofitClient.instance.getRandomLoveQuote().enqueue(object : Callback<Quote> {
-            override fun onResponse(call: Call<Quote>, response: Response<Quote>) {
-                if (response.isSuccessful) {
-                    val quote = response.body()
-                    binding.quoteText.text = "\"${quote?.content ?: "No quote available"}\""
-                    binding.quoteAuthor.text = "- ${quote?.author ?: "Unknown"}"
+        RetrofitClient.instance.getRandomLoveQuote().enqueue(object : Callback<List<Quote>> {
+            override fun onResponse(call: Call<List<Quote>>, response: Response<List<Quote>>) {
+                if (response.isSuccessful && !response.body().isNullOrEmpty()) {
+                    val quote = response.body()!![0]
+                    binding.quoteText.text = "\"${quote.q}\""
+                    binding.quoteAuthor.text = "- ${quote.a}"
                 } else {
                     binding.quoteText.text = "Could not load love quote 😔"
                     binding.quoteAuthor.text = ""
@@ -107,7 +107,7 @@ class DashboardActivity : AppCompatActivity() {
                 binding.quoteAuthor.animate().alpha(1f).setDuration(500).start()
             }
 
-            override fun onFailure(call: Call<Quote>, t: Throwable) {
+            override fun onFailure(call: Call<List<Quote>>, t: Throwable) {
                 binding.quoteText.text = "Network error 💔"
                 binding.quoteAuthor.text = ""
                 binding.quoteText.animate().alpha(1f).setDuration(500).start()

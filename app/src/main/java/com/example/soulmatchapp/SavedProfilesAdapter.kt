@@ -1,13 +1,11 @@
 package com.example.soulmatchapp
 
-
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.yourapp.model.Profile
+import com.example.soulmatchapp.model.Profile
 
 class SavedProfilesAdapter : RecyclerView.Adapter<SavedProfilesAdapter.ProfileViewHolder>() {
 

@@ -46,17 +46,33 @@
             app:layout_constraintTop_toBottomOf="@id/userName"
             android:layout_marginTop="4dp" />
 
-        <Button
-            android:id="@+id/chatButton"
+        <LinearLayout
+            android:id="@+id/buttonRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chat"
-            android:textColor="@android:color/white"
-            android:backgroundTint="#ff748c"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/userDetails"
             app:layout_constraintStart_toStartOf="@id/userName"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/chatButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chat"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#ff748c" />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="#4CAF50" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

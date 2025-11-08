@@ -14,7 +14,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.android.material.snackbar.Snackbar
 
+@Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
@@ -30,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id)) // from google-services.json
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
@@ -73,7 +75,8 @@ class LoginActivity : AppCompatActivity() {
             val account: GoogleSignInAccount = task.getResult(ApiException::class.java)
             firebaseAuthWithGoogle(account.idToken!!)
         } catch (e: ApiException) {
-            Toast.makeText(this, "Google Sign-In failed", Toast.LENGTH_SHORT).show()
+            // Use Snackbar to avoid Toast crash
+            Snackbar.make(binding.root, "Google Sign-In failed: ${e.statusCode}", Snackbar.LENGTH_SHORT).show()
         }
     }
 
@@ -90,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(Intent(this, DashboardActivity::class.java))
                     finish()
                 } else {
-                    Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, "Authentication failed.", Snackbar.LENGTH_SHORT).show()
                 }
             }
     }
@@ -101,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this, DashboardActivity::class.java))
                 finish()
             } else {
-                Toast.makeText(this, "Login failed", Toast.LENGTH_LONG).show()
+                Snackbar.make(binding.root, "Login failed", Snackbar.LENGTH_LONG).show()
             }
         }
     }
